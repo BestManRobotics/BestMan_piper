@@ -500,7 +500,7 @@ class Bestman_piper:
     # ----------------------------------------------------------------
     
     ### xArm 
-    def find_gripper_xarm(self):
+    def find_gripper(self):
         '''
         Searches for the gripper on available serial ports and returns the port if found.
 
@@ -513,12 +513,12 @@ class Bestman_piper:
         else:
             return False
 
-    def get_gripper_pos_xarm(self):
+    def get_gripper_pos(self):
         '''
         Get the position of the XArm gripper.
         '''
         gripper_status = self.robot.GetArmGripperMsgs()
-        return gripper_status.grippers_angle[0]
+        return gripper_status.gripper_state.grippers_angle[0]
 
     def gripper_goto(self, value, speed=5000, force=None):
         '''
@@ -535,37 +535,37 @@ class Bestman_piper:
         '''
         self.robot.GripperCtrl(round(value),1000,0x01, 0)
 
-    def open_gripper_xarm(self):
+    def open_gripper(self):
         ''' Opens the gripper to its maximum position with maximum speed and force. '''
         ####################### 66mm  1Nm
         self.robot.GripperCtrl(66000,1000,0x01, 0)
 
-    def close_gripper_xarm(self):
+    def close_gripper(self):
         '''Closes the gripper to its minimum position with maximum speed and force.'''
         self.robot.GripperCtrl(000,1000,0x01, 0)
     
-### Robotiq
+# ### Robotiq
     
-    def find_gripper_robotiq(self):
-        """
-        Config the parameter via Python SDK
-        """
-        # Baud rate
-        # Modify the baud rate to 115200, the default is 2000000.
-        self.robot.set_tgpio_modbus_baudrate(115200)  
+#     def find_gripper_robotiq(self):
+#         """
+#         Config the parameter via Python SDK
+#         """
+#         # Baud rate
+#         # Modify the baud rate to 115200, the default is 2000000.
+#         self.robot.set_tgpio_modbus_baudrate(115200)  
 
-        # TCP Payload and offset
-        # Robotiq 2F/85 Gripper
-        self.robot.set_tcp_load(0.925, [0, 0, 58])
-        self.robot.set_tcp_offset([0, 0, 174, 0, 0, 0])
-        self.robot.save_conf()
+#         # TCP Payload and offset
+#         # Robotiq 2F/85 Gripper
+#         self.robot.set_tcp_load(0.925, [0, 0, 58])
+#         self.robot.set_tcp_offset([0, 0, 174, 0, 0, 0])
+#         self.robot.save_conf()
 
-        # Self-Collision Prevention Model
-        # Robotiq 2F/85 Gripper
-        self.robot.set_collision_tool_model(4)
+#         # Self-Collision Prevention Model
+#         # Robotiq 2F/85 Gripper
+#         self.robot.set_collision_tool_model(4)
 
-        self.robot.robotiq_reset()
-        self.robot.robotiq_set_activate()    #enable the robotiq gripper
+#         self.robot.robotiq_reset()
+#         self.robot.robotiq_set_activate()    #enable the robotiq gripper
         
 
 

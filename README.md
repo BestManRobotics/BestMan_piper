@@ -1,4 +1,4 @@
-<!-- # BestMan_Xarm -->
+<!-- # BestMan_Piper -->
 <img src="docs/BestMan_logo.png" alt="BestMan Logo" width="700"/>
 
 <!-- # BestMan_Flexiv - A Pybullet-based Mobile Manipulator Simulator -->
@@ -10,7 +10,7 @@
 [![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
 [![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat)](https://timothycrosley.github.io/isort/) -->
 
-Welcome to the BestMan_Xarm repository, a codebase dedicated to the XArm 6 robotic arm.
+Welcome to the BestMan_Piper repository, a codebase dedicated to the piper x arm.
 
 
 ## 💻 Installation
@@ -21,22 +21,22 @@ Welcome to the BestMan_Xarm repository, a codebase dedicated to the XArm 6 robot
     conda env create -f basic_environment.yaml
     ```
 
-- Install xArm-Python-SDK
+- Install piper-SDK
+    follow https://github.com/agilexrobotics/piper_sdk
+
 
     ```bash
-    cd ~
-    git clone https://github.com/xArm-Developer/xArm-Python-SDK.git
-    python3 setup.py install
+    pip3 install python-can
+    git clone https://github.com/agilexrobotics/piper_sdk.git
+    cd piper_sdk
+    pip3 install .
     ```
 
-- Clone the BestMan_Xarm Repository
-
-    ```bash
-    git clone https://github.com/yding25/BestMan_Xarm.git
+- activate robot can
     ```
-
-
-
+    cd piper_sdk
+    bash can_activate.sh
+    ```
 ## 🔎 Project Structure
 
 Generate and view the project structure:
@@ -51,15 +51,15 @@ firefox /home/$(whoami)/BestMan_Xarm/docs/html/index.html # API document
 ```bash
 cd ~/BestMan_Xarm/Examples/
 # Demo: Go Home
-python3 move_arm_to_home.py 192.168.1.208
+python3 move_arm_to_home.py
 
 # Demo: Move Joints
-python3 move_arm_to_joint_angles.py 192.168.1.208
+python3 move_arm_to_joint_angles.py
 
 # Demo: Move gripper
-python3 close_gripper.py 192.168.1.208
-python3 open_gripper.py 192.168.1.208
-python3 open_gripper_width.py 192.168.1.208
+python3 close_gripper.py
+python3 open_gripper.py
+python3 open_gripper_width.py
 ```
 
 (We are fixing other demos.)
